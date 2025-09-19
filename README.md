@@ -1,6 +1,11 @@
 
 # Knowledege pack learning Mobile App
 This repository contains the source code for the Smart Skill E-learning Mobile App. The project's design, including wireframes and a UI design, is detailed in Figma.
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
+    <img src="images/knowledge.png" alt="Knowledge Pack app logo" width="250" height="400">
+    <img src="images/onboarding.png" alt="Onboarding screens" width="250" height="400">
+    <img src="images/courese.png" alt="courese screen" width="250" height="400">
+</div>
 
 ### Project Overview
 The Smart Skill E-learning Mobile App is an adaptive, offline learning platform designed to provide a seamless educational experience. The app aims to help users acquire new skills with a user-friendly interface that is accessible even without an internet connection.
