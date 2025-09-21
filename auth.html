@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Auth Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .auth-container {
+            max-width: 350px;
+            margin: 60px auto;
+            padding: 2em;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .auth-container h2 {
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        .auth-container label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .auth-container input[type="text"],
+        .auth-container input[type="password"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .auth-container button {
+            width: 100%;
+            padding: 0.7em;
+            background: #0078d4;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .auth-container button:hover {
+            background: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Sign In</h2>
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
