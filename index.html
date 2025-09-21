@@ -1,77 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Knowledge Pack App - Welcome</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Pack App</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', sans-serif; overflow: hidden; }
-
-    /* Animated gradient background */
-    .animated-bg {
-      background: linear-gradient(270deg, #ff0080, #7928ca, #2afadf, #4facfe);
-      background-size: 800% 800%;
-      animation: gradientMove 15s ease infinite;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    #loading-screen {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.8); display: flex; flex-direction: column;
-      align-items: center; justify-content: center; z-index: 999;
-      transition: opacity 1s ease-in-out;
-    }
-    #main-content { display: none; }
-  </style>
 </head>
-<body class="animated-bg flex items-center justify-center min-h-screen p-4">
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+  <div class="bg-white shadow-2xl rounded-2xl p-10 max-w-lg text-center animate-fade-in">
+    <!-- Logo -->
+    <img src="logo.png" alt="Knowledge Pack Logo" class="h-32 w-auto animate-pulse mb-4 mx-auto">
 
-  <!-- Splash / Loading Screen -->
-  <div id="loading-screen">
-    <div class="flex flex-col items-center">
-      <img src="images/knowledge.png" alt="Logo" class="h-24 w-auto animate-pulse mb-2">
-      <h1 class="text-4xl font-extrabold text-white">Knowledge Pack</h1>
+    <!-- Title -->
+    <h1 class="text-4xl font-extrabold text-gray-800 mb-4">
+      Welcome to <span class="text-blue-600">Knowledge Pack App</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-gray-600 text-lg mb-6">
+      A smart way to access, organize, and boost your learning with interactive knowledge packs.
+    </p>
+
+    <!-- Features -->
+    <div class="grid grid-cols-1 gap-4 text-left mb-6">
+      <div class="p-4 rounded-lg bg-blue-100 shadow">
+        📚 Create, edit, and share knowledge packs
+      </div>
+      <div class="p-4 rounded-lg bg-purple-100 shadow">
+        🚀 Track your learning progress with ease
+      </div>
+      <div class="p-4 rounded-lg bg-pink-100 shadow">
+        🌍 Connect and collaborate with other learners
+      </div>
     </div>
+
+    <!-- Button -->
+    <a href="auth.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-blue-700 transition">
+      Get Started
+    </a>
   </div>
 
-  <!-- Main Welcome Content -->
-  <div id="main-content" class="max-w-md w-full flex flex-col items-center justify-center space-y-8 bg-white/90 backdrop-blur-lg rounded-3xl p-8 shadow-2xl text-center">
-    <div class="flex flex-col items-center">
-      <img src="images/knowledge.png" alt="Logo" class="h-24 w-auto mb-2">
-      <h1 class="text-4xl font-extrabold text-gray-900">Knowledge Pack</h1>
-    </div>
-
-    <div class="space-y-3">
-      <h2 class="text-2xl font-bold text-gray-800">Welcome to Knowledge Pack App</h2>
-      <p class="text-gray-600 text-sm">
-        A powerful learning platform designed to help you <span class="font-semibold">collect, organize, and grow your knowledge</span>.  
-        Access courses, practice skills, and unlock your full potential with engaging content packs.
-      </p>
-    </div>
-
-    <div class="w-full space-y-4">
-      <button onclick="window.location.href='auth.html'" class="w-full py-4 px-6 bg-indigo-600 text-white rounded-full font-semibold shadow-lg hover:scale-105 transition-transform">Create an account</button>
-      <button onclick="window.location.href='auth.html'" class="w-full py-4 px-6 bg-gray-200 text-gray-800 rounded-full font-semibold shadow-md hover:scale-105 transition-transform">Sign In</button>
-    </div>
-  </div>
-
-  <script>
-    window.onload = () => {
-      const loading = document.getElementById('loading-screen');
-      const main = document.getElementById('main-content');
-      loading.style.opacity = '0';
-      setTimeout(() => {
-        loading.style.display = 'none';
-        main.style.display = 'flex';
-        document.body.style.overflow = 'auto';
-      }, 1000);
-    };
-  </script>
+  <!-- Simple animation -->
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+  </style>
 </body>
 </html>

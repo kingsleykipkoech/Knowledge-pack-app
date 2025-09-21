@@ -1,58 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Knowledge Pack App - Authentication</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Pack App - Sign In</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-
-    /* Animated gradient background */
-    .animated-bg {
-      background: linear-gradient(270deg, #ff0080, #7928ca, #2afadf, #4facfe);
-      background-size: 800% 800%;
-      animation: gradientMove 15s ease infinite;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-  </style>
 </head>
-<body class="animated-bg flex items-center justify-center min-h-screen p-4">
-
-  <!-- Auth Box -->
-  <div class="max-w-md w-full bg-white/90 backdrop-blur-lg rounded-3xl p-8 shadow-2xl">
-    <div class="text-center mb-6">
-      <img src="images/knowledge.png" alt="Logo" class="h-16 w-auto mx-auto mb-2">
-      <h1 class="text-3xl font-extrabold text-gray-900">Knowledge Pack</h1>
-      <p class="text-gray-600 text-sm mt-2">
-        Sign in to continue your learning journey, or create an account to get started with Knowledge Packs today.
-      </p>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500">
+  <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full animate-fade-in">
+    <!-- Logo -->
+    <div class="flex justify-center mb-4">
+      <img src="logo.png" alt="Knowledge Pack Logo" class="h-20 w-auto">
     </div>
 
-    <!-- Sign In Form -->
-    <form id="signin-form" class="space-y-4 mb-6">
-      <h2 class="text-xl font-semibold text-gray-800 text-center">Sign In</h2>
-      <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">
-      <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">
-      <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded-lg font-semibold shadow-md hover:scale-105 transition-transform">Sign In</button>
+    <!-- Title -->
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+      Sign In to <span class="text-blue-600">Knowledge Pack</span>
+    </h2>
+
+    <!-- Form -->
+    <form class="space-y-4">
+      <div>
+        <label for="email" class="block text-left text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="you@example.com">
+      </div>
+      <div>
+        <label for="password" class="block text-left text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="••••••••">
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Sign In
+      </button>
     </form>
 
-    <div class="my-6 border-t border-gray-300"></div>
-
-    <!-- Sign Up Form -->
-    <form id="signup-form" class="space-y-4">
-      <h2 class="text-xl font-semibold text-gray-800 text-center">Create Account</h2>
-      <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500">
-      <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500">
-      <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500">
-      <button type="submit" class="w-full py-3 bg-pink-500 text-white rounded-lg font-semibold shadow-md hover:scale-105 transition-transform">Sign Up</button>
-    </form>
+    <!-- Footer -->
+    <p class="text-center text-sm text-gray-600 mt-4">
+      Don’t have an account?
+      <a href="#" class="text-blue-600 hover:underline">Sign up</a>
+    </p>
   </div>
 
+  <!-- Simple animation -->
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+  </style>
 </body>
 </html>
