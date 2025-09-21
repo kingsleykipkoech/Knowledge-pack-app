@@ -1,143 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Skill App - Auth</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #eef3f7;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Skill App - Authentication</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Animated gradient background */
+    .animated-bg {
+      background: linear-gradient(270deg, #ff0080, #7928ca, #2afadf, #4facfe);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
 </head>
-<body class="bg-[#eef3f7] flex items-center justify-center min-h-screen p-4">
+<body class="animated-bg flex items-center justify-center min-h-screen p-4">
 
-    <!-- Main App Container -->
-    <div class="max-w-md w-full h-full flex flex-col items-center justify-center space-y-8 bg-white rounded-3xl p-8 shadow-xl text-center">
-        <!-- Back to Welcome Page Link -->
-        <a href="index.html" class="self-start text-indigo-600 font-semibold flex items-center space-x-1 transition-colors hover:text-indigo-800">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            <span>Back</span>
-        </a>
-
-        <!-- Auth Header -->
-        <div class="flex flex-col items-center">
-            <h1 id="auth-title" class="text-3xl font-extrabold text-gray-900 tracking-tight">Create an Account</h1>
-            <p id="auth-subtitle" class="text-gray-500 text-sm mt-2">Enter your details to get started.</p>
-        </div>
-
-        <!-- Auth Form -->
-        <form class="w-full space-y-4">
-            <div>
-                <input type="email" id="email" placeholder="Email address" required class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-            </div>
-            <div>
-                <input type="password" id="password" placeholder="Password" required class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-            </div>
-            <button type="submit" id="auth-submit-btn" class="w-full py-4 px-6 bg-indigo-600 text-white rounded-full font-semibold shadow-lg transition-transform transform hover:scale-105">
-                Sign Up
-            </button>
-        </form>
-
-        <!-- Social Sign-in and Switch Link -->
-        <p class="text-xs text-gray-400">Or sign in with</p>
-        <div class="flex space-x-4">
-            <button class="bg-white p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.001 4.793c1.786 0 3.393.732 4.542 1.916l2.368-2.368c-1.57-1.554-3.71-2.541-6.91-2.541-5.11 0-9.453 3.654-10.748 8.44l2.585.811c1.235-3.692 4.678-6.304 8.29-6.304z"/>
-                    <path d="M21.575 11.246c0-.853-.075-1.579-.204-2.296h-.002l-9.378-1.53c-1.282-1.74-3.328-2.82-5.59-2.82s-4.308 1.08-5.59 2.82c-.129.717-.204 1.443-.204 2.296h10.994l.002.002c0 .853-.075 1.579-.204 2.296-1.282 1.74-3.328 2.82-5.59 2.82s-4.308-1.08-5.59-2.82c-.129-.717-.204-1.443-.204-2.296h-2.52c0 .853.075 1.579.204 2.296 1.427 3.678 4.77 6.29 8.382 6.29s6.955-2.612 8.382-6.29c.129-.717.204-1.443.204-2.296z"/>
-                    <path d="M12.001 21.21c5.11 0 9.453-3.654 10.748-8.44l-2.585-.811c-1.235 3.692-4.678 6.304-8.29 6.304s-7.055-2.612-8.29-6.304l-2.585.811c1.295 4.786 5.638 8.44 10.748 8.44z"/>
-                </svg>
-            </button>
-            <button class="bg-white p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.016c-5.514 0-9.984 4.47-9.984 9.984s4.47 9.984 9.984 9.984c5.515 0 9.984-4.47 9.984-9.984s-4.469-9.984-9.984-9.984zM16.516 8.583a1.492 1.492 0 00-1.472-1.464c-.878-.007-1.499.585-1.499 1.464 0 .88.621 1.478 1.499 1.478.85 0 1.472-.598 1.472-1.478zM7.498 8.583a1.492 1.492 0 00-1.472-1.464c-.878-.007-1.499.585-1.499 1.464 0 .88.621 1.478 1.499 1.478.85 0 1.472-.598 1.472-1.478z"/>
-                </svg>
-            </button>
-            <button class="bg-white p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.799 8.205 11.385l.044.009v-.009h.001l.006-.002h.001c.078.016.155.031.233.045.541.084 1.086.126 1.631.126 6.627 0 12-5.373 12-12S18.627 0 12 0zm-1.898 17.513V12.793h-2.315V10.297h2.315V8.411c0-2.28 1.258-3.921 4.548-3.921l2.493.001v2.302h-1.637c-1.198 0-1.28.45-1.28 1.253v1.252h2.894l-.377 2.496h-2.517v4.716l-.001-.001z"/>
-                </svg>
-            </button>
-        </div>
-
-        <p id="switch-mode-link" class="text-xs text-gray-500 mt-4">
-            Already have an account? <a href="#" class="text-indigo-600 font-medium hover:underline">Sign In</a>
-        </p>
+  <!-- Auth Box -->
+  <div class="max-w-md w-full bg-white/90 backdrop-blur-lg rounded-3xl p-8 shadow-2xl">
+    <div class="text-center mb-6">
+      <img src="images/knowledge.png" alt="Logo" class="h-16 w-auto mx-auto mb-2">
+      <h1 class="text-3xl font-extrabold text-gray-900">Smart Skill</h1>
     </div>
 
-    <!-- Modal for messages -->
-    <div id="message-modal" class="modal">
-        <div class="modal-content max-w-sm">
-            <h3 class="text-lg font-bold">Message</h3>
-            <p id="modal-message" class="mt-2 text-sm text-gray-600">This is a placeholder message.</p>
-            <button id="close-modal-btn" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg">Got It</button>
-        </div>
-    </div>
+    <!-- Sign In Form -->
+    <form id="signin-form" class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-800 text-center">Sign In</h2>
+      <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">
+      <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">
+      <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded-lg font-semibold shadow-md hover:scale-105 transition-transform">Sign In</button>
+    </form>
 
-    <script>
-        const authTitle = document.getElementById('auth-title');
-        const authSubtitle = document.getElementById('auth-subtitle');
-        const authSubmitBtn = document.getElementById('auth-submit-btn');
-        const switchModeLink = document.getElementById('switch-mode-link');
-        const modal = document.getElementById('message-modal');
-        const modalMessage = document.getElementById('modal-message');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        let isSignInMode = false;
+    <div class="my-6 border-t border-gray-300"></div>
 
-        function showMessage(message) {
-            modalMessage.textContent = message;
-            modal.style.display = 'flex';
-        }
+    <!-- Sign Up Form -->
+    <form id="signup-form" class="space-y-4">
+      <h2 class="text-xl font-semibold text-gray-800 text-center">Create Account</h2>
+      <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500">
+      <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500">
+      <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-pink-500">
+      <button type="submit" class="w-full py-3 bg-pink-500 text-white rounded-lg font-semibold shadow-md hover:scale-105 transition-transform">Sign Up</button>
+    </form>
+  </div>
 
-        closeModalBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        // Toggle between Sign In and Sign Up modes
-        switchModeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            isSignInMode = !isSignInMode;
-            if (isSignInMode) {
-                authTitle.textContent = 'Sign In';
-                authSubtitle.textContent = 'Welcome back! Sign in to continue.';
-                authSubmitBtn.textContent = 'Sign In';
-                switchModeLink.innerHTML = 'Don\'t have an account? <a href="#" class="text-indigo-600 font-medium hover:underline">Sign Up</a>';
-            } else {
-                authTitle.textContent = 'Create an Account';
-                authSubtitle.textContent = 'Enter your details to get started.';
-                authSubmitBtn.textContent = 'Sign Up';
-                switchModeLink.innerHTML = 'Already have an account? <a href="#" class="text-indigo-600 font-medium hover:underline">Sign In</a>';
-            }
-        });
-    </script>
 </body>
 </html>
