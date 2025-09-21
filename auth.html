@@ -10,10 +10,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #eef3f7;
-        }
-        .form-container {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            overflow: hidden; /* Prevent scrolling during the splash screen */
         }
         .modal {
             display: none;
@@ -38,209 +35,191 @@
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
+        /* Custom styles for the loading screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #eef3f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: opacity 1s ease-in-out;
+        }
+        /* Style for the main content to be hidden initially */
+        #main-content {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-[#eef3f7] flex items-center justify-center min-h-screen p-4">
 
-    <!-- Main Auth Container -->
-    <div class="max-w-md w-full flex flex-col items-center justify-center space-y-8 bg-white rounded-3xl p-8 shadow-xl text-center">
-        
-        <!-- App Logo/Icon -->
+    <!-- Loading Screen -->
+    <div id="loading-screen">
         <div class="flex flex-col items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-indigo-600 mb-2" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-            </svg>
+            <img src="https://placehold.co/96x96/c7d2fe/4f46e5?text=Auth" alt="Authentication Icon" class="h-24 w-auto animate-pulse mb-2">
             <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Smart Skill</h1>
         </div>
+    </div>
 
-        <!-- Auth Forms and Content -->
-        <div id="auth-container" class="w-full space-y-4">
-            
-            <!-- Sign In Form -->
-            <div id="signin-form" class="form-container w-full space-y-4">
-                <h2 class="text-2xl font-bold text-gray-800">Sign In</h2>
-                <form id="signin-form-elem" class="w-full space-y-4">
-                    <input type="email" id="signin-email" placeholder="Email address" required
-                           class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
-                    <input type="password" id="signin-password" placeholder="Password" required
-                           class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
-                    <button type="submit" class="w-full py-4 px-6 bg-indigo-600 text-white rounded-full font-semibold shadow-lg transition-transform transform hover:scale-105">
-                        Sign In
-                    </button>
-                </form>
-                <button id="switch-to-signup" class="w-full text-sm text-indigo-600 hover:underline">
-                    Don't have an account? Sign Up
-                </button>
-            </div>
+    <!-- Main App Container - Initially Hidden -->
+    <div id="main-content" class="max-w-md w-full h-full flex flex-col items-center justify-center space-y-8 bg-white rounded-3xl p-8 shadow-xl text-center">
+        <!-- Back to Welcome Page Link -->
+        <a href="index.html" class="self-start text-indigo-600 font-semibold flex items-center space-x-1 transition-colors hover:text-indigo-800">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Back</span>
+        </a>
 
-            <!-- Sign Up Form -->
-            <div id="signup-form" class="form-container w-full space-y-4">
-                <h2 class="text-2xl font-bold text-gray-800">Create an account</h2>
-                <form id="signup-form-elem" class="w-full space-y-4">
-                    <input type="email" id="signup-email" placeholder="Email address" required
-                           class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
-                    <input type="password" id="signup-password" placeholder="Password" required
-                           class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
-                    <button type="submit" class="w-full py-4 px-6 bg-indigo-600 text-white rounded-full font-semibold shadow-lg transition-transform transform hover:scale-105">
-                        Sign Up
-                    </button>
-                </form>
-                <button id="switch-to-signin" class="w-full text-sm text-indigo-600 hover:underline">
-                    Already have an account? Sign In
-                </button>
-            </div>
-
-            <!-- Logged-in view -->
-            <div id="loggedin-view" class="hidden w-full space-y-4">
-                <h2 class="text-2xl font-bold text-gray-800">Welcome!</h2>
-                <p class="text-gray-500 text-sm">You are now authenticated.</p>
-                <div class="text-xs text-gray-400 break-all">
-                    User ID: <span id="user-id" class="text-gray-800 font-mono"></span>
-                </div>
-                <button id="signout-btn" class="w-full py-4 px-6 bg-gray-200 text-gray-800 rounded-full font-semibold shadow-md transition-transform transform hover:scale-105">
-                    Sign Out
-                </button>
-            </div>
+        <!-- Auth Header -->
+        <div class="flex flex-col items-center">
+            <h1 id="auth-title" class="text-3xl font-extrabold text-gray-900 tracking-tight">Create an Account</h1>
+            <p id="auth-subtitle" class="text-gray-500 text-sm mt-2">Enter your details to get started.</p>
         </div>
 
+        <!-- Auth Form -->
+        <form class="w-full space-y-4">
+            <div>
+                <input type="email" id="email" placeholder="Email address" required class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="Password" required class="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+            </div>
+            <button type="submit" id="auth-submit-btn" class="w-full py-4 px-6 bg-indigo-600 text-white rounded-full font-semibold shadow-lg transition-transform transform hover:scale-105">
+                Sign Up
+            </button>
+        </form>
+
+        <!-- Social Sign-in and Switch Link -->
+        <p class="text-xs text-gray-400">Or sign in with</p>
+        <div class="flex space-x-4">
+            <button class="bg-white p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.001 4.793c1.786 0 3.393.732 4.542 1.916l2.368-2.368c-1.57-1.554-3.71-2.541-6.91-2.541-5.11 0-9.453 3.654-10.748 8.44l2.585.811c1.235-3.692 4.678-6.304 8.29-6.304z"/>
+                    <path d="M21.575 11.246c0-.853-.075-1.579-.204-2.296h-.002l-9.378-1.53c-1.282-1.74-3.328-2.82-5.59-2.82s-4.308 1.08-5.59 2.82c-.129.717-.204 1.443-.204 2.296h10.994l.002.002c0 .853-.075 1.579-.204 2.296-1.282 1.74-3.328 2.82-5.59 2.82s-4.308-1.08-5.59-2.82c-.129-.717-.204-1.443-.204-2.296h-2.52c0 .853.075 1.579.204 2.296 1.427 3.678 4.77 6.29 8.382 6.29s6.955-2.612 8.382-6.29c.129-.717.204-1.443.204-2.296z"/>
+                    <path d="M12.001 21.21c5.11 0 9.453-3.654 10.748-8.44l-2.585-.811c-1.235 3.692-4.678 6.304-8.29 6.304s-7.055-2.612-8.29-6.304l-2.585.811c1.295 4.786 5.638 8.44 10.748 8.44z"/>
+                </svg>
+            </button>
+            <button class="bg-white p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.016c-5.514 0-9.984 4.47-9.984 9.984s4.47 9.984 9.984 9.984c5.515 0 9.984-4.47 9.984-9.984s-4.469-9.984-9.984-9.984zM16.516 8.583a1.492 1.492 0 00-1.472-1.464c-.878-.007-1.499.585-1.499 1.464 0 .88.621 1.478 1.499 1.478.85 0 1.472-.598 1.472-1.478zM7.498 8.583a1.492 1.492 0 00-1.472-1.464c-.878-.007-1.499.585-1.499 1.464 0 .88.621 1.478 1.499 1.478.85 0 1.472-.598 1.472-1.478z"/>
+                </svg>
+            </button>
+            <button class="bg-white p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.799 8.205 11.385l.044.009v-.009h.001l.006-.002h.001c.078.016.155.031.233.045.541.084 1.086.126 1.631.126 6.627 0 12-5.373 12-12S18.627 0 12 0zm-1.898 17.513V12.793h-2.315V10.297h2.315V8.411c0-2.28 1.258-3.921 4.548-3.921l2.493.001v2.302h-1.637c-1.198 0-1.28.45-1.28 1.253v1.252h2.894l-.377 2.496h-2.517v4.716l-.001-.001z"/>
+                </svg>
+            </button>
+        </div>
+
+        <p id="switch-mode-link" class="text-xs text-gray-500 mt-4">
+            Already have an account? <a href="#" class="text-indigo-600 font-medium hover:underline">Sign In</a>
+        </p>
     </div>
 
     <!-- Modal for messages -->
     <div id="message-modal" class="modal">
         <div class="modal-content max-w-sm">
-            <h3 id="modal-title" class="text-lg font-bold"></h3>
-            <p id="modal-message" class="mt-2 text-sm text-gray-600"></p>
+            <h3 class="text-lg font-bold">Message</h3>
+            <p id="modal-message" class="mt-2 text-sm text-gray-600">This is a placeholder message.</p>
             <button id="close-modal-btn" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg">Got It</button>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <script>
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
+        const authSubmitBtn = document.getElementById('auth-submit-btn');
+        const switchModeLink = document.getElementById('switch-mode-link');
+        const modal = document.getElementById('message-modal');
+        const modalMessage = document.getElementById('modal-message');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        let isSignInMode = false;
 
-        // Firebase configuration and initialization
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-
-        if (Object.keys(firebaseConfig).length > 0) {
-            setLogLevel('debug');
-            const app = initializeApp(firebaseConfig);
-            const auth = getAuth(app);
-            const db = getFirestore(app);
-
-            // Get references to DOM elements
-            const signinForm = document.getElementById('signin-form');
-            const signupForm = document.getElementById('signup-form');
-            const loggedinView = document.getElementById('loggedin-view');
-            const switchLoginBtn = document.getElementById('switch-to-signin');
-            const switchSignupBtn = document.getElementById('switch-to-signup');
-            const signoutBtn = document.getElementById('signout-btn');
-            const userIdDisplay = document.getElementById('user-id');
-            const messageModal = document.getElementById('message-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalMessage = document.getElementById('modal-message');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-
-            // Function to show the modal
-            const showModal = (title, message) => {
-                modalTitle.textContent = title;
-                modalMessage.textContent = message;
-                messageModal.style.display = 'flex';
-            };
-
-            // Event listener to close the modal
-            closeModalBtn.addEventListener('click', () => {
-                messageModal.style.display = 'none';
-            });
-            
-            // Function to toggle between forms
-            const toggleForms = (show) => {
-                if (show === 'signin') {
-                    signinForm.style.display = 'block';
-                    signupForm.style.display = 'none';
-                } else if (show === 'signup') {
-                    signinForm.style.display = 'none';
-                    signupForm.style.display = 'block';
-                } else {
-                    signinForm.style.display = 'none';
-                    signupForm.style.display = 'none';
-                }
-            };
-            
-            // Handle form switching
-            switchLoginBtn.addEventListener('click', () => toggleForms('signin'));
-            switchSignupBtn.addEventListener('click', () => toggleForms('signup'));
-
-            // Handle Sign Up form submission
-            document.getElementById('signup-form-elem').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('signup-email').value;
-                const password = document.getElementById('signup-password').value;
-                try {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                    showModal('Success', 'Account created successfully!');
-                } catch (error) {
-                    showModal('Error', `Sign-up failed: ${error.message}`);
-                }
-            });
-
-            // Handle Sign In form submission
-            document.getElementById('signin-form-elem').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('signin-email').value;
-                const password = document.getElementById('signin-password').value;
-                try {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    showModal('Success', 'Signed in successfully!');
-                } catch (error) {
-                    showModal('Error', `Sign-in failed: ${error.message}`);
-                }
-            });
-
-            // Handle Sign Out
-            signoutBtn.addEventListener('click', async () => {
-                try {
-                    await signOut(auth);
-                    showModal('Signed Out', 'You have been signed out.');
-                } catch (error) {
-                    showModal('Error', `Sign-out failed: ${error.message}`);
-                }
-            });
-
-            // Firebase Auth State Listener
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    // User is signed in
-                    userIdDisplay.textContent = user.uid;
-                    loggedinView.style.display = 'block';
-                    toggleForms(null);
-                } else {
-                    // User is signed out or not authenticated
-                    loggedinView.style.display = 'none';
-                    toggleForms('signin');
-                }
-            });
-
-            // Initial authentication check with custom token
-            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-            if (initialAuthToken) {
-                signInWithCustomToken(auth, initialAuthToken).catch((error) => {
-                    console.error("Custom token sign-in failed:", error);
-                });
-            } else {
-                signInAnonymously(auth).catch((error) => {
-                    console.error("Anonymous sign-in failed:", error);
-                });
-            }
-        } else {
-            document.getElementById('auth-container').innerHTML = `
-                <div class="text-center">
-                    <h2 class="text-xl font-bold text-red-600">Firebase Configuration Missing</h2>
-                    <p class="mt-2 text-gray-500">Please provide a valid Firebase configuration to enable authentication features.</p>
-                </div>
-            `;
+        function showMessage(message) {
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
         }
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Toggle between Sign In and Sign Up modes
+        switchModeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isSignInMode = !isSignInMode;
+            if (isSignInMode) {
+                authTitle.textContent = 'Sign In';
+                authSubtitle.textContent = 'Welcome back! Sign in to continue.';
+                authSubmitBtn.textContent = 'Sign In';
+                switchModeLink.innerHTML = 'Don\'t have an account? <a href="#" class="text-indigo-600 font-medium hover:underline">Sign Up</a>';
+            } else {
+                authTitle.textContent = 'Create an Account';
+                authSubtitle.textContent = 'Enter your details to get started.';
+                authSubmitBtn.textContent = 'Sign Up';
+                switchModeLink.innerHTML = 'Already have an account? <a href="#" class="text-indigo-600 font-medium hover:underline">Sign In</a>';
+            }
+        });
+
+        // Add a function to handle the splash screen fade out
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Start the fade out effect
+            loadingScreen.style.opacity = '0';
+
+            // After the transition, hide the loading screen and show the main content
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                mainContent.style.display = 'flex';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }, 1000); // This should match the CSS transition duration
+        }
+
+        // Call the function when the page has fully loaded
+        window.onload = hideLoadingScreen;
     </script>
 </body>
 </html>
+    </div>
+
+    <script>
+        // Get references to buttons
+        const signupBtn = document.getElementById('signup-btn');
+        const signinBtn = document.getElementById('signin-btn');
+
+        // Event listeners for the buttons to redirect to auth.html
+        signupBtn.addEventListener('click', () => {
+            window.location.href = 'auth.html';
+        });
+
+        signinBtn.addEventListener('click', () => {
+            window.location.href = 'auth.html';
+        });
+
+        // Add a function to handle the splash screen fade out
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Start the fade out effect
+            loadingScreen.style.opacity = '0';
+
+            // After the transition, hide the loading screen and show the main content
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                mainContent.style.display = 'flex';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }, 1000); // This should match the CSS transition duration
+        }
+
+        // Call the function when the page has fully loaded
+        window.onload = hideLoadingScreen;
+    </script>   

@@ -115,41 +115,18 @@
         </div>
     </div>
 
-    <!-- Modal for messages -->
-    <div id="message-modal" class="modal">
-        <div class="modal-content max-w-sm">
-            <h3 class="text-lg font-bold">Action Not Implemented</h3>
-            <p class="mt-2 text-sm text-gray-600">This button would normally lead to the sign-up or sign-in page, but for this demo, it's a placeholder.</p>
-            <button id="close-modal-btn" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg">Got It</button>
-        </div>
-    </div>
-
     <script>
-        // Get references to buttons and the modal
+        // Get references to buttons
         const signupBtn = document.getElementById('signup-btn');
         const signinBtn = document.getElementById('signin-btn');
-        const messageModal = document.getElementById('message-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
 
-        // Function to show the modal
-        function showModal(message) {
-            const modalMessage = messageModal.querySelector('p');
-            modalMessage.textContent = message;
-            messageModal.style.display = 'flex';
-        }
-
-        // Event listeners for the buttons
+        // Event listeners for the buttons to redirect to auth.html
         signupBtn.addEventListener('click', () => {
-            showModal("This button would lead to the sign-up form.");
+            window.location.href = 'auth.html';
         });
 
         signinBtn.addEventListener('click', () => {
-            showModal("This button would lead to the sign-in form.");
-        });
-
-        // Event listener to close the modal
-        closeModalBtn.addEventListener('click', () => {
-            messageModal.style.display = 'none';
+            window.location.href = 'auth.html';
         });
 
         // Add a function to handle the splash screen fade out
