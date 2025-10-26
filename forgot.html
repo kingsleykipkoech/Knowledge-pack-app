@@ -1,0 +1,13 @@
+<script>
+  document.getElementById("forgotForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const btn = event.target.querySelector("button");
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Sending...';
+
+    setTimeout(() => {
+      alert("📧 Password reset link sent!");
+      window.location.href = "auth.html";
+    }, 2000);
+  });
+</script>

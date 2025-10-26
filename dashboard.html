@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Knowledge Pack App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center shadow">
+    <h1 class="text-xl font-bold">📚 Knowledge Pack</h1>
+    <div class="space-x-4">
+      <a href="dashboard.html" class="hover:underline">Dashboard</a>
+      <a href="packs.html" class="hover:underline">My Packs</a>
+      <a href="index.html" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="p-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Welcome back 👋</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="font-bold text-lg mb-2">📖 Learn New Skills</h3>
+        <p class="text-gray-600">Explore packs that match your learning interests.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="font-bold text-lg mb-2">🚀 Track Progress</h3>
+        <p class="text-gray-600">See how far you’ve come in your knowledge journey.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="font-bold text-lg mb-2">🌍 Collaborate</h3>
+        <p class="text-gray-600">Connect with others and share your own knowledge packs.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
